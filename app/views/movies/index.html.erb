@@ -2,15 +2,56 @@
 
 <% content_for :title, "Movies" %>
 
-<h1>Movies</h1>
+<h1 style="text-align: center; color: crimson; font-size: 36px; margin-bottom: 30px; text-shadow: 2px 2px 4px #aaa;">Movies</h1>
 
-<div id="movies">
-  <% @movies.each do |movie| %>
-    <%= render movie %>
-    <p>
-      <%= link_to "Show this movie", movie %>
-    </p>
-  <% end %>
+<table style="width: 100%; border-collapse: collapse; table-layout: fixed;">
+  <thead>
+    <tr style="background-color: #e0e0e0;">
+      <%# Highlight the column based on sort params %>
+      <th style="border: 1px solid #ddd; padding: 8px; <%= 'background-color: #a9a9a9;' if params[:sort] == 'title' %>">
+        <%= sortable "title", "Title" %>
+        <% if params[:sort] == 'title' %>
+          <%= params[:direction] == 'asc' ? '▲' : '▼' %>
+        <% end %>
+      </th>
+      <th style="border: 1px solid #ddd; padding: 8px; <%= 'background-color: #a9a9a9;' if params[:sort] == 'rating' %>">
+        <%= sortable "rating", "Rating" %>
+        <% if params[:sort] == 'rating' %>
+          <%= params[:direction] == 'asc' ? '▲' : '▼' %>
+        <% end %>
+      </th>
+      <th style="border: 1px solid #ddd; padding: 8px; <%= 'background-color: #a9a9a9;' if params[:sort] == 'release_date' %>">
+        <%= sortable "release_date", "Release Date" %>
+        <% if params[:sort] == 'release_date' %>
+          <%= params[:direction] == 'asc' ? '▲' : '▼' %>
+        <% end %>
+      </th>
+      <th style="border: 1px solid #ddd; padding: 8px;">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @movies.each_with_index do |movie, index| %>
+      <tr style="background-color: <%= index.even? ? '#f2f2f2' : '#ffffff' %>;">
+        <td style="border: 1px solid #ddd; padding: 8px;"><%= movie.title %></td>
+        <td style="border: 1px solid #ddd; padding: 8px;"><%= movie.rating %></td>
+        <td style="border: 1px solid #ddd; padding: 8px;"><%= movie.release_date.strftime("%B %d, %Y") %></td>
+        <td style="border: 1px solid #ddd; padding: 8px;">
+          <%= link_to "Show", movie_path(movie, sort: params[:sort], direction: params[:direction]), style: "color: blue;" %> |
+          <%= link_to "Edit", edit_movie_path(movie, sort: params[:sort], direction: params[:direction]), style: "color: orange;" %> |
+          <%= link_to "Delete", movie_path(movie, sort: params[:sort], direction: params[:direction]), method: :delete, data: { confirm: "Are you sure?" }, style: "color: red;" %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+  <tfoot>
+    <tr>
+      <td colspan="4" style="border: 1px solid #ddd; padding: 8px; text-align: center;">
+        Total Movies: <%= @movies.count %>
+      </td>
+    </tr>
+  </tfoot>
+</table>
+
+<div style="text-align: center; margin-top: 40px;">
+  <%= link_to "New Movie", new_movie_path(sort: params[:sort], direction: params[:direction]), style: "padding: 10px 20px; background-color: crimson; color: white; text-decoration: none; border-radius: 5px;" %>
 </div>
-
-<%= link_to "New movie", new_movie_path %>

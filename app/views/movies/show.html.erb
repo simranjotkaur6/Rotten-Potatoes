@@ -1,10 +1,16 @@
-<p style="color: green"><%= notice %></p>
+<p style="color: green; font-weight: bold; margin-bottom: 20px;"><%= notice %></p>
 
-<%= render @movie %>
+<div style="border: 1px solid #ddd; padding: 20px; border-radius: 10px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); background-color: #f9f9f9; margin-bottom: 20px;">
+  <%= render @movie %>
+</div>
 
-<div>
-  <%= link_to "Edit this movie", edit_movie_path(@movie) %> |
-  <%= link_to "Back to movies", movies_path %>
+<div style="margin-top: 30px; text-align: center; display: flex; justify-content: center; gap: 20px;">
+  <!-- Edit Movie Link -->
+  <%= link_to "Edit this movie", edit_movie_path(@movie), style: "padding: 10px 20px; background-color: #e74c3c; color: white; text-decoration: none; border-radius: 5px;" %>
 
-  <%= button_to "Destroy this movie", @movie, method: :delete %>
+  <!-- Back to Movies Link -->
+  <%= link_to 'Back to movies', movies_path(sort: params[:sort], direction: params[:direction]), style: "padding: 10px 20px; background-color: crimson; color: white; text-decoration: none; border-radius: 5px;" %>
+
+  <!-- Destroy Movie Button -->
+  <%= button_to "Destroy this movie", @movie, method: :delete, data: { confirm: "Are you sure?" }, style: "padding: 10px 20px; background-color: #e74c3c; color: white; border: none; border-radius: 5px; cursor: pointer;" %>
 </div>

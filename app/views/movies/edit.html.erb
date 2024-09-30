@@ -1,12 +1,17 @@
 <% content_for :title, "Editing movie" %>
 
-<h1>Editing movie</h1>
+<h1 style="text-align: center; color: crimson; font-size: 36px; margin-bottom: 30px; text-shadow: 2px 2px 4px #aaa;">Editing Movie</h1>
 
-<%= render "form", movie: @movie %>
+<div style="border: 1px solid #ddd; padding: 20px; border-radius: 10px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); background-color: #f9f9f9; margin-bottom: 20px;">
+  <%= render "form", movie: @movie %>
+</div>
 
 <br>
 
-<div>
-  <%= link_to "Show this movie", @movie %> |
-  <%= link_to "Back to movies", movies_path %>
+<div style="margin-top: 30px; text-align: center; display: flex; justify-content: center; gap: 20px;">
+  <!-- Show Movie Link -->
+  <%= link_to "Show this movie", @movie, style: "padding: 10px 20px; background-color: #e74c3c; color: white; text-decoration: none; border-radius: 5px;" %>
+
+  <!-- Back to Movies Link -->
+  <%= link_to "Back to movies", movies_path(sort: params[:sort], direction: params[:direction]), style: "padding: 10px 20px; background-color: crimson; color: white; text-decoration: none; border-radius: 5px;" %>
 </div>

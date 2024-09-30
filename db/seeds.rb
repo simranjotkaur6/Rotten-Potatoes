@@ -9,18 +9,16 @@
 #   end
 # Seed the RottenPotatoes DB with some movies.
 more_movies = [
-  {:title => 'My Neighbor Totoro', :rating => 'G',
-    :release_date => '16-Apr-1988'},
-  {:title => 'Green Book', :rating => 'PG-13',
-    :release_date => '16-Nov-2018'},
-  {:title => 'Parasite', :rating => 'R',
-    :release_date => '30-May-2019'},
-  {:title => 'Nomadland', :rating => 'R',
-    :release_date => '19-Feb-2021'},
-  {:title => 'CODA', :rating => 'PG-13',
-    :release_date => '13-Aug-2021'}
+  {:title => 'My Neighbor Totoro', :rating => 'G', :release_date => '16-Apr-1988'},
+  {:title => 'Green Book', :rating => 'PG-13', :release_date => '16-Nov-2018'},
+  {:title => 'Parasite', :rating => 'R', :release_date => '30-May-2019'},
+  {:title => 'Nomadland', :rating => 'R', :release_date => '19-Feb-2021'},
+  {:title => 'CODA', :rating => 'PG-13', :release_date => '13-Aug-2021'},
+  {:title => 'Shutter Island', :rating => 'R', :release_date => '19-Feb-2010'},
+  {:title => 'The Shawshank Redemption', :rating => 'R', :release_date => '25-Sep-1994'},
+  {:title => 'Zindagi Na Milegi Dobara', :rating => 'TV-14', :release_date => '27-May-2011'}
 ]
 
 more_movies.each do |movie|
-  Movie.create!(movie)
+  Movie.find_or_create_by(movie)
 end
